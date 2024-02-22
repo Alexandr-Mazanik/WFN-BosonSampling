@@ -151,6 +151,7 @@
     <ClInclude Include="..\lib\samplers\BFbosonSampler.h" />
     <ClInclude Include="..\lib\samplers\CoherentSampler.h" />
     <ClInclude Include="..\lib\samplers\DistinguishableSampler.h" />
+    <ClInclude Include="..\lib\samplers\all_samplers.h" />
     <ClInclude Include="..\lib\samplers\UniformSampler.h" />
     <ClInclude Include="..\lib\space\FockState.h" />
     <ClInclude Include="..\lib\space\StateSpace.h" />

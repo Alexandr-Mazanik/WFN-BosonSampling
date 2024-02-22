@@ -1,8 +1,4 @@
-﻿#include "samplers/BFbosonSampler.h"
-#include "samplers/UniformSampler.h"
-#include "samplers/CoherentSampler.h"
-#include "samplers/DistinguishableSampler.h"
-
+﻿#include "samplers/all_samplers.h"
 #include "network/Network.h"
 
 #include <iostream>

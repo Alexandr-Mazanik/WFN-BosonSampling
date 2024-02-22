@@ -104,5 +104,8 @@
     <ClInclude Include="..\lib\interferometer\Scheme.h">
       <Filter>Файлы заголовков\interferometer</Filter>
     </ClInclude>
+    <ClInclude Include="..\lib\samplers\all_samplers.h">
+      <Filter>Файлы заголовков\samplers</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
