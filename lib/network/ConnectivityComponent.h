@@ -1,6 +1,6 @@
 #pragma once
 
-#include "FockState.h"
+#include "space/FockState.h"
 
 class ConnectivityComponent {
 public:

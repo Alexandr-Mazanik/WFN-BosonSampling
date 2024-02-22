@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Scheme.h"
-#include "StateSpace.h"
+#include "space/StateSpace.h"
+#include "interferometer/Scheme.h"
 
 class DistinguishableSampler {
 public:

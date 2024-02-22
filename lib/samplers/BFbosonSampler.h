@@ -1,7 +1,7 @@
 #pragma once
 
-#include "StateSpace.h"
-#include "Scheme.h"
+#include "space/StateSpace.h"
+#include "interferometer/Scheme.h"
 
 class BFbosonSampler {
 public:

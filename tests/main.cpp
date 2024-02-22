@@ -1,9 +1,9 @@
-﻿#include "BFbosonSampler.h"
-#include "UniformSampler.h"
-#include "CoherentSampler.h"
-#include "DistinguishableSampler.h"
+﻿#include "samplers/BFbosonSampler.h"
+#include "samplers/UniformSampler.h"
+#include "samplers/CoherentSampler.h"
+#include "samplers/DistinguishableSampler.h"
 
-#include "Network.h"
+#include "network/Network.h"
 
 #include <iostream>
 #include <fstream>
@@ -31,9 +31,9 @@ float calc_mean_vec(std::vector<float> vec) {
 }
 
 int main() {
-	int points_num = 2;
+	int points_num = 1000;
 
-	int ph_num = 3;
+	int ph_num = 4;
 	int dim_number = ph_num * ph_num;
 	int radius = 2;
 
@@ -43,7 +43,7 @@ int main() {
 	StateSpace spaceDS(ph_num, dim_number, false);
 	
 	Scheme scheme(spaceBS);
-	scheme.ImportSchemeUnitary("scheme/scheme_unitary_3.txt");
+	scheme.ImportSchemeUnitary("scheme_unitary_4.txt");
 
 	std::vector<int> init_conf(ph_num, 1);
 	init_conf.resize(dim_number);
@@ -142,6 +142,7 @@ int main() {
 		all_dispersions_ds.clear();
 	}
 
+	/*
 	export_vec_to_file<float>(means_bs, "means_bs_3_large_N.txt");
 	export_vec_to_file<float>(means_uf, "means_uf_3_large_N.txt");
 	export_vec_to_file<float>(means_ch, "means_ch_3_large_N.txt");
@@ -151,6 +152,7 @@ int main() {
 	export_vec_to_file<float>(disp_uf, "disp_uf_3_large_N.txt");
 	export_vec_to_file<float>(disp_ch, "disp_ch_3_large_N.txt");
 	export_vec_to_file<float>(disp_ds, "disp_ds_3_large_N.txt");
+	*/
 
 	return 0;
 }

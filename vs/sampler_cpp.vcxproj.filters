@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Исходные файлы">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков\samplers">
+      <UniqueIdentifier>{c2dcd6fb-dd2c-4be4-8b8c-701281777f1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\network">
+      <UniqueIdentifier>{bd863a7d-b022-47d5-bf38-64ba4b79d3bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\space">
+      <UniqueIdentifier>{1cb87d38-6841-4132-8044-30e50fa66da0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\interferometer">
+      <UniqueIdentifier>{b14fe019-94d1-4bb5-ae2a-ee254696e7c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\samplers">
+      <UniqueIdentifier>{593e620c-e97b-4744-9173-3a505ed0eb78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\network">
+      <UniqueIdentifier>{d11082f3-7afe-4107-bc2b-86e8cf43d34b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\interferometer">
+      <UniqueIdentifier>{ad167991-5a04-48c0-b126-c4a3c909f47c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\space">
+      <UniqueIdentifier>{ce30bc37-ccfe-4965-9d69-da6041b55135}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\lib\math_lib.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tests\main.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\samplers\BFbosonSampler.cpp">
+      <Filter>Исходные файлы\samplers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\samplers\CoherentSampler.cpp">
+      <Filter>Исходные файлы\samplers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\samplers\DistinguishableSampler.cpp">
+      <Filter>Исходные файлы\samplers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\samplers\UniformSampler.cpp">
+      <Filter>Исходные файлы\samplers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\network\Network.cpp">
+      <Filter>Исходные файлы\network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\network\ConnectivityComponent.cpp">
+      <Filter>Исходные файлы\network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\space\FockState.cpp">
+      <Filter>Исходные файлы\space</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\space\StateSpace.cpp">
+      <Filter>Исходные файлы\space</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\interferometer\Scheme.cpp">
+      <Filter>Исходные файлы\interferometer</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\lib\math_lib.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\samplers\BFbosonSampler.h">
+      <Filter>Файлы заголовков\samplers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\samplers\CoherentSampler.h">
+      <Filter>Файлы заголовков\samplers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\samplers\DistinguishableSampler.h">
+      <Filter>Файлы заголовков\samplers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\samplers\UniformSampler.h">
+      <Filter>Файлы заголовков\samplers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\space\FockState.h">
+      <Filter>Файлы заголовков\space</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\space\StateSpace.h">
+      <Filter>Файлы заголовков\space</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\network\Network.h">
+      <Filter>Файлы заголовков\network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\network\ConnectivityComponent.h">
+      <Filter>Файлы заголовков\network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\interferometer\Scheme.h">
+      <Filter>Файлы заголовков\interferometer</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

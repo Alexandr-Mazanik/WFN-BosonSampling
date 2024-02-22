@@ -1,5 +1,5 @@
-#include "CoherentSampler.h"
-#include "math.h"
+#include "samplers/CoherentSampler.h"
+#include "math_lib.h"
 
 #include <random>
 #include <chrono>

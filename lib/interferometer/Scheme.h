@@ -1,13 +1,12 @@
 #pragma once
 
-#include "StateSpace.h"
+#include "space/StateSpace.h"
 
 #include <complex>
 
 class Scheme {
 public:
 	std::vector<std::vector<std::complex<float>>> unitary_matrix;
-	//std::vector<int> ref_modes;
 
 	Scheme(StateSpace& space);
 	

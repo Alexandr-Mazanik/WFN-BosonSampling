@@ -1,4 +1,5 @@
-#include "FockState.h"
+#include "space/FockState.h"
+
 #include <iostream>
 
 FockState::FockState(std::vector<int>& state, int dim_num) :

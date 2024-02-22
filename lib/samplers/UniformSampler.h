@@ -1,5 +1,6 @@
 #pragma once
-#include "StateSpace.h"
+
+#include "space/StateSpace.h"
 
 class UniformSampler {
 public:

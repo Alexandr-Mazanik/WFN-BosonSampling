@@ -1,4 +1,4 @@
-#include "DistinguishableSampler.h"
+#include "samplers/DistinguishableSampler.h"
 
 #include <random>
 #include <chrono>

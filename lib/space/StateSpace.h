@@ -1,6 +1,7 @@
 #pragma once
 
-#include "FockState.h"
+#include "space/FockState.h"
+
 #include <string>
 
 class StateSpace {

@@ -1,5 +1,5 @@
-#include "StateSpace.h"
-#include "math.h"
+#include "space/StateSpace.h"
+#include "math_lib.h"
 
 #include <iostream>
 #include <fstream>

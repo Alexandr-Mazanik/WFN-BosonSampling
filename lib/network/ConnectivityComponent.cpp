@@ -1,4 +1,4 @@
-#include "ConnectivityComponent.h"
+#include "network/ConnectivityComponent.h"
 
 #include <cmath>
 

@@ -71,6 +71,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>..\lib;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -128,29 +131,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BFbosonSampler.cpp" />
-    <ClCompile Include="CoherentSampler.cpp" />
-    <ClCompile Include="ConnectivityComponent.cpp" />
-    <ClCompile Include="DistinguishableSampler.cpp" />
-    <ClCompile Include="FockState.cpp" />
-    <ClCompile Include="Network.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Scheme.cpp" />
-    <ClCompile Include="math.cpp" />
-    <ClCompile Include="StateSpace.cpp" />
-    <ClCompile Include="UniformSampler.cpp" />
+    <ClCompile Include="..\lib\interferometer\Scheme.cpp" />
+    <ClCompile Include="..\lib\math_lib.cpp" />
+    <ClCompile Include="..\lib\network\ConnectivityComponent.cpp" />
+    <ClCompile Include="..\lib\network\Network.cpp" />
+    <ClCompile Include="..\lib\samplers\BFbosonSampler.cpp" />
+    <ClCompile Include="..\lib\samplers\CoherentSampler.cpp" />
+    <ClCompile Include="..\lib\samplers\DistinguishableSampler.cpp" />
+    <ClCompile Include="..\lib\samplers\UniformSampler.cpp" />
+    <ClCompile Include="..\lib\space\FockState.cpp" />
+    <ClCompile Include="..\lib\space\StateSpace.cpp" />
+    <ClCompile Include="..\tests\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BFbosonSampler.h" />
-    <ClInclude Include="CoherentSampler.h" />
-    <ClInclude Include="ConnectivityComponent.h" />
-    <ClInclude Include="DistinguishableSampler.h" />
-    <ClInclude Include="FockState.h" />
-    <ClInclude Include="Network.h" />
-    <ClInclude Include="math.h" />
-    <ClInclude Include="Scheme.h" />
-    <ClInclude Include="StateSpace.h" />
-    <ClInclude Include="UniformSampler.h" />
+    <ClInclude Include="..\lib\interferometer\Scheme.h" />
+    <ClInclude Include="..\lib\math_lib.h" />
+    <ClInclude Include="..\lib\network\ConnectivityComponent.h" />
+    <ClInclude Include="..\lib\network\Network.h" />
+    <ClInclude Include="..\lib\samplers\BFbosonSampler.h" />
+    <ClInclude Include="..\lib\samplers\CoherentSampler.h" />
+    <ClInclude Include="..\lib\samplers\DistinguishableSampler.h" />
+    <ClInclude Include="..\lib\samplers\UniformSampler.h" />
+    <ClInclude Include="..\lib\space\FockState.h" />
+    <ClInclude Include="..\lib\space\StateSpace.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,4 +1,4 @@
-#include "math.h"
+#include "math_lib.h"
 
 void get_comb(int offset, int k, const std::vector<int>& arr,
 	std::vector<int>& comb, std::vector<std::vector<int>>& combs) {

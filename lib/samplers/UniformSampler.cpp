@@ -1,4 +1,4 @@
-#include "UniformSampler.h"
+#include "samplers/UniformSampler.h"
 
 #include <iostream>
 #include <random>

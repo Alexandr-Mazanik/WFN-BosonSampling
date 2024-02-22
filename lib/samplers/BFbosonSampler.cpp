@@ -1,5 +1,5 @@
-#include "BFbosonSampler.h"
-#include "math.h"
+#include "samplers/BFbosonSampler.h"
+#include "math_lib.h"
 
 #include <iostream>
 #include <random>
