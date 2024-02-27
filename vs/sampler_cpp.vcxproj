@@ -150,6 +150,7 @@
     <ClCompile Include="..\tests\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\bs-StateSpace.h" />
     <ClInclude Include="..\lib\interferometer\Scheme.h" />
     <ClInclude Include="..\lib\math_lib.h" />
     <ClInclude Include="..\lib\network\ConnectivityComponent.h" />

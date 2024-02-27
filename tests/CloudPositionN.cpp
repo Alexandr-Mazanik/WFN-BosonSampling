@@ -1,5 +1,4 @@
-﻿#include "samplers/all_samplers.h"
-#include "network/Network.h"
+﻿#include <bs-StateSpace.h>
 
 #include <iostream>
 #include <fstream>

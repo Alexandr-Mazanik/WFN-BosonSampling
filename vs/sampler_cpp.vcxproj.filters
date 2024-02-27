@@ -107,5 +107,8 @@
     <ClInclude Include="..\lib\samplers\all_samplers.h">
       <Filter>Файлы заголовков\samplers</Filter>
     </ClInclude>
+    <ClInclude Include="..\bs-StateSpace.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
