@@ -12,7 +12,7 @@ void Scheme::ImportSchemeUnitary(std::string file_name) {
 	std::ifstream f_unitary;
 	std::string s_unitary;
 	
-	f_unitary.open("../resources/scheme/" + file_name);
+	f_unitary.open("../../resources/scheme/" + file_name);
 
 	if (f_unitary.is_open()) {
 		int row_num = 0;

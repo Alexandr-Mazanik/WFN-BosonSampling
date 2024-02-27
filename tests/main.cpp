@@ -20,9 +20,9 @@ void export_vec_to_file(std::vector<T> vec, std::string file_name) {
 
 float calc_mean_vec(std::vector<float> vec) {
 	float total = 0;
-	for (float elem : vec) 
+	for (float elem : vec)
 		total += elem;
-	
+
 	return total / vec.size();
 }
 
@@ -37,7 +37,7 @@ int main() {
 	StateSpace spaceUF(spaceBS);
 	StateSpace spaceCH(ph_num, dim_number, false);
 	StateSpace spaceDS(ph_num, dim_number, false);
-	
+
 	Scheme scheme(spaceBS);
 	scheme.ImportSchemeUnitary("scheme_unitary_4.txt");
 
