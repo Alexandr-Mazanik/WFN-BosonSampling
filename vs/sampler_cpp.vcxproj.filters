@@ -42,9 +42,6 @@
     <ClCompile Include="..\lib\math_lib.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="..\tests\main.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="..\lib\samplers\BFbosonSampler.cpp">
       <Filter>Исходные файлы\samplers</Filter>
     </ClCompile>
@@ -71,6 +68,9 @@
     </ClCompile>
     <ClCompile Include="..\lib\interferometer\Scheme.cpp">
       <Filter>Исходные файлы\interferometer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\file_lib.cpp">
+      <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -108,6 +108,9 @@
       <Filter>Файлы заголовков\samplers</Filter>
     </ClInclude>
     <ClInclude Include="..\bs-StateSpace.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\file_lib.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

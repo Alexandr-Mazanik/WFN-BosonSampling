@@ -137,6 +137,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\lib\file_lib.cpp" />
     <ClCompile Include="..\lib\interferometer\Scheme.cpp" />
     <ClCompile Include="..\lib\math_lib.cpp" />
     <ClCompile Include="..\lib\network\ConnectivityComponent.cpp" />
@@ -147,10 +148,10 @@
     <ClCompile Include="..\lib\samplers\UniformSampler.cpp" />
     <ClCompile Include="..\lib\space\FockState.cpp" />
     <ClCompile Include="..\lib\space\StateSpace.cpp" />
-    <ClCompile Include="..\tests\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\bs-StateSpace.h" />
+    <ClInclude Include="..\lib\file_lib.h" />
     <ClInclude Include="..\lib\interferometer\Scheme.h" />
     <ClInclude Include="..\lib\math_lib.h" />
     <ClInclude Include="..\lib\network\ConnectivityComponent.h" />

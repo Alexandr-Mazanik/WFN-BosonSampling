@@ -1,21 +1,7 @@
 ﻿#include <bs-StateSpace.h>
 
 #include <iostream>
-#include <fstream>
 #include <string>
-
-template <typename T>
-void export_vec_to_file(std::vector<T> vec, std::string file_name) {
-	std::ofstream f_data;
-
-	f_data.open("./data/" + file_name);
-
-	if (f_data.is_open())
-		for (T elem : vec)
-			f_data << elem << " ";
-	else
-		std::cout << "--> Couldn't open file\n";
-}
 
 int main() {
 	int points_num = 1000;
@@ -23,9 +9,6 @@ int main() {
 	int ph_num = 4;
 	int dim_number = ph_num * ph_num;
 	int radius = 2;
-
-	std::vector<float> vec = { 1.12, 122.31, -12.2, 1.2 };
-	std::cout << get_vec_avg(vec);
 
 	StateSpace spaceBS(ph_num, dim_number);
 	StateSpace spaceUF(spaceBS);
@@ -132,7 +115,6 @@ int main() {
 		all_dispersions_ds.clear();
 	}
 
-	/*
 	export_vec_to_file<float>(means_bs, "means_bs_3_large_N.txt");
 	export_vec_to_file<float>(means_uf, "means_uf_3_large_N.txt");
 	export_vec_to_file<float>(means_ch, "means_ch_3_large_N.txt");
@@ -142,7 +124,6 @@ int main() {
 	export_vec_to_file<float>(disp_uf, "disp_uf_3_large_N.txt");
 	export_vec_to_file<float>(disp_ch, "disp_ch_3_large_N.txt");
 	export_vec_to_file<float>(disp_ds, "disp_ds_3_large_N.txt");
-	*/
 
 	return 0;
 }
