@@ -52,3 +52,11 @@ void CoherentSampler::sample(int batch_size) {
 		(*space_ptr_).AddSampledState(sample, prob);
 	}
 }
+
+StateSpace* CoherentSampler::space_ptr() {
+	return space_ptr_;
+}
+
+std::string CoherentSampler::get_name() {
+	return "ch";
+}

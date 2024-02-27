@@ -1,31 +1,38 @@
 #include "network/Network.h"
+#include "space/StateSpace.h"
 
 #include <iostream>
 #include <fstream>
 #include <stack>
 
-Network::Network(StateSpace& space, int radius) : networkSpace_(space.getModesNum(), space.getSampledStates()) {
-	vertices_num_ = networkSpace_.getStatesNumber();
+Network::Network(StateSpace* space_ptr, int radius) {
+	StateSpace sampled_space(space_ptr->getModesNum(), space_ptr->getSampledStates());
+	networkSpace_ = &sampled_space;
+
+	vertices_num_ = networkSpace_->getStatesNumber();
 
 	network_.resize(vertices_num_, std::vector<bool>(vertices_num_));
 	BuildNetwork(radius);
 };
 
 Network::Network(const Network& network) : networkSpace_(network.networkSpace_) {
-	vertices_num_ = networkSpace_.getStatesNumber();
+	vertices_num_ = networkSpace_->getStatesNumber();
 
 	network_ = network.network_;
 }
 
-Network::Network(StateSpace& space) : networkSpace_(space.getModesNum()) {
-	vertices_num_ = networkSpace_.getStatesNumber();
+Network::Network(StateSpace* space_ptr) {
+	StateSpace space(space_ptr->getModesNum());
+	networkSpace_ = &space;
+
+	vertices_num_ = networkSpace_->getStatesNumber();
 }
 
 void Network::BuildNetwork(int radius) {
 	for (int i = 0; i < vertices_num_; ++i) {
 		network_[i][i] = false;
 		for (int j = i + 1; j < vertices_num_; ++j)
-			if (networkSpace_.states[i].L1Distance(networkSpace_.states[j]) <= radius)
+			if (networkSpace_->states[i].L1Distance(networkSpace_->states[j]) <= radius)
 				network_[i][j] = network_[j][i] = true;
 			else
 				network_[i][j] = network_[j][i] = false;
@@ -51,8 +58,8 @@ void Network::DFS(int vertex, std::vector<bool>& visited) {
 		if (!visited[curr]) {
 			visited[curr] = true;
 
-			std::vector<int> state = networkSpace_.states[curr].getState();
-			con_comp.networkSpace_.AddState(state);
+			std::vector<int> state = networkSpace_->states[curr].getState();
+			con_comp.networkSpace_->AddState(state);
 			for (int i = network_[curr].size() - 1; i >= 0; i--)
 				if (network_[curr][i])
 					st.push(i);
@@ -67,8 +74,8 @@ std::vector<int> Network::componentsDistribution() {
 
 	std::vector<int> dist_vert_num;
 	for (int i = 0; i < con_comp_.size(); ++i)
-		for (int j = 0; j < con_comp_[i].networkSpace_.getStatesNumber(); ++j)
-			dist_vert_num.push_back(con_comp_[i].networkSpace_.getStatesNumber());
+		for (int j = 0; j < con_comp_[i].networkSpace_->getStatesNumber(); ++j)
+			dist_vert_num.push_back(con_comp_[i].networkSpace_->getStatesNumber());
 
 	return dist_vert_num;
 }
@@ -113,8 +120,8 @@ std::vector<Network>& Network::getConComp() {
 
 void Network::printNetwork() {
 	std::cout << "--> Network:\n";
-	for (int i = 0; i < networkSpace_.getStatesNumber(); ++i) {
-		for (int j = 0; j < networkSpace_.getStatesNumber(); ++j) {
+	for (int i = 0; i < networkSpace_->getStatesNumber(); ++i) {
+		for (int j = 0; j < networkSpace_->getStatesNumber(); ++j) {
 			std::cout << network_[i][j] << " ";
 		}
 		std::cout << std::endl;

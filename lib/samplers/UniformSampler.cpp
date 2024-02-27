@@ -14,3 +14,11 @@ void UniformSampler::sample(int batch_size) {
 	}
 	std::cout << "--> Samples has been calculated\n";
 }
+
+StateSpace* UniformSampler::space_ptr() {
+	return space_ptr_;
+}
+
+std::string UniformSampler::get_name() {
+	return "uf";
+}

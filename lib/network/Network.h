@@ -4,8 +4,8 @@
 
 class Network {
 public:
-	Network(StateSpace& space, int radius);
-	Network(StateSpace& space);
+	Network(StateSpace* space_ptr, int radius);
+	Network(StateSpace* space_ptr);
 	Network(const Network& network);
 
 	void BuildNetwork(int radius);
@@ -22,7 +22,7 @@ public:
 	void printNetwork();
 
 private:
-	StateSpace networkSpace_;
+	StateSpace* networkSpace_;
 
 	std::vector<Network> con_comp_;
 	std::vector<std::vector<bool>> network_;

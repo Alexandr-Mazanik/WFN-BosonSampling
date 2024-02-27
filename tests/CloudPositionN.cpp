@@ -1,12 +1,16 @@
-﻿#include <bs-StateSpace.h>
+﻿
+#include <bs-StateSpace.h>
 
 #include <iostream>
-#include <string>
 
 int main() {
-	int points_num = 1000;
+	int N_start = 1;
+	int N_end = 200;
+	int N_step = 10;
 
-	int ph_num = 4;
+	int avg_amount = 100;
+
+	int ph_num = 3;
 	int dim_number = ph_num * ph_num;
 	int radius = 2;
 
@@ -16,7 +20,7 @@ int main() {
 	StateSpace spaceDS(ph_num, dim_number, false);
 
 	Scheme scheme(spaceBS);
-	scheme.ImportSchemeUnitary("scheme_unitary_4.txt");
+	scheme.ImportSchemeUnitary("scheme_unitary_3.txt");
 
 	std::vector<int> init_conf(ph_num, 1);
 	init_conf.resize(dim_number);
@@ -24,106 +28,49 @@ int main() {
 	std::vector<std::complex<float>> init_conf_coherent(ph_num, 1);
 	init_conf_coherent.resize(dim_number);
 
-	BFbosonSampler sampler_bf(&spaceBS, scheme, init_conf);
-	UniformSampler sampler_uf(&spaceUF);
-	CoherentSampler sampler_ch(&spaceCH, scheme, init_conf_coherent);
-	DistinguishableSampler sampler_ds(&spaceDS, scheme, init_conf);
+	std::vector<Sampler*> samplers = { 
+		new BFbosonSampler(&spaceBS, scheme, init_conf), 
+		new CoherentSampler(&spaceCH, scheme, init_conf_coherent), 
+		new UniformSampler(&spaceUF),
+		new DistinguishableSampler(&spaceDS, scheme, init_conf) 
+	};
 
+	std::vector<float> all_cloud_mu, all_cloud_sigma;
+	std::vector<float> avg_mu, avg_sigma;
 
-	std::vector<float> all_means_bs;
-	std::vector<float> all_means_uf;
-	std::vector<float> all_means_ch;
-	std::vector<float> all_means_ds;
+	for (Sampler* sampler : samplers) {
+		for (int N = N_start; N <= N_end; N += N_step) {
+			std::cout << "\n--> points_number = " << N << ";\n";
 
-	std::vector<float> all_dispersions_bs;
-	std::vector<float> all_dispersions_uf;
-	std::vector<float> all_dispersions_ch;
-	std::vector<float> all_dispersions_ds;
+			for (int i = 0; i < avg_amount; ++i) {
+				sampler->sample(N);
+				Network network(sampler->space_ptr(), radius);
+				std::vector<float> two_moments = network.degDistTwoMoments(network.degreeDistribution());
 
-	std::vector<float> bs_moments;
-	std::vector<float> uf_moments;
-	std::vector<float> ch_moments;
-	std::vector<float> ds_moments;
+				all_cloud_mu.push_back(two_moments[0]);
+				all_cloud_sigma.push_back(two_moments[1]);
 
-	std::vector<float> means_bs;
-	std::vector<float> means_uf;
-	std::vector<float> means_ch;
-	std::vector<float> means_ds;
+				sampler->space_ptr()->reset();
+			}
 
-	std::vector<float> disp_bs;
-	std::vector<float> disp_uf;
-	std::vector<float> disp_ch;
-	std::vector<float> disp_ds;
+			avg_mu.push_back(get_vec_avg(all_cloud_mu));
+			avg_sigma.push_back(get_vec_avg(all_cloud_sigma));
 
-	for (int p_num = points_num; p_num <= 1002; p_num += 20) {
-		for (int i = 0; i < 100; ++i) {
-			std::cout << "\n--> points_number = " << p_num << ";\n";
-			std::cout << "\n--> i = " << i << ";\n";
-
-			sampler_bf.sample(p_num);
-			sampler_uf.sample(p_num);
-			sampler_ch.sample(p_num);
-			sampler_ds.sample(p_num);
-
-			Network network_bs(spaceBS, radius);
-			Network network_uf(spaceUF, radius);
-			Network network_ch(spaceCH, radius);
-			Network network_ds(spaceDS, radius);
-
-			bs_moments = network_bs.degDistTwoMoments(network_bs.degreeDistribution());
-			uf_moments = network_uf.degDistTwoMoments(network_uf.degreeDistribution());
-			ch_moments = network_ch.degDistTwoMoments(network_ch.degreeDistribution());
-			ds_moments = network_ds.degDistTwoMoments(network_ds.degreeDistribution());
-
-			all_means_bs.push_back(bs_moments[0]);
-			all_means_uf.push_back(uf_moments[0]);
-			all_means_ch.push_back(ch_moments[0]);
-			all_means_ds.push_back(ds_moments[0]);
-
-			all_dispersions_bs.push_back(bs_moments[1]);
-			all_dispersions_uf.push_back(uf_moments[1]);
-			all_dispersions_ch.push_back(ch_moments[1]);
-			all_dispersions_ds.push_back(ds_moments[1]);
-
-			spaceBS.reset();
-			spaceUF.reset();
-			spaceCH.reset();
-			spaceDS.reset();
-			bs_moments.clear();
-			uf_moments.clear();
-			ch_moments.clear();
-			ds_moments.clear();
+			all_cloud_mu.clear();
+			all_cloud_sigma.clear();	
 		}
+		
+		std::string file_name_mu = "cloud_position_N/data/cloud_mu_N_" + std::to_string(N_start) + "_" + 
+			std::to_string(N_end) + "_" + std::to_string(N_step) + "_" + sampler->get_name() + ".txt";
+		std::string file_name_sigma = "cloud_position_N/data/cloud_sigma_N_" + std::to_string(N_start) + "_" + 
+			std::to_string(N_end) + "_" + std::to_string(N_step) + "_" + sampler->get_name() + ".txt";
 
-		means_bs.push_back(get_vec_avg(all_means_bs));
-		means_uf.push_back(get_vec_avg(all_means_uf));
-		means_ch.push_back(get_vec_avg(all_means_ch));
-		means_ds.push_back(get_vec_avg(all_means_ds));
+		export_vec_to_file<float>(avg_mu, file_name_mu);
+		export_vec_to_file<float>(avg_sigma, file_name_sigma);
 
-		disp_bs.push_back(get_vec_avg(all_dispersions_bs));
-		disp_uf.push_back(get_vec_avg(all_dispersions_uf));
-		disp_ch.push_back(get_vec_avg(all_dispersions_ch));
-		disp_ds.push_back(get_vec_avg(all_dispersions_ds));
-
-		all_means_bs.clear();
-		all_means_uf.clear();
-		all_means_ch.clear();
-		all_means_ds.clear();
-		all_dispersions_bs.clear();
-		all_dispersions_uf.clear();
-		all_dispersions_ch.clear();
-		all_dispersions_ds.clear();
+		avg_mu.clear();
+		avg_sigma.clear();
 	}
-
-	export_vec_to_file<float>(means_bs, "means_bs_3_large_N.txt");
-	export_vec_to_file<float>(means_uf, "means_uf_3_large_N.txt");
-	export_vec_to_file<float>(means_ch, "means_ch_3_large_N.txt");
-	export_vec_to_file<float>(means_ds, "means_ds_3_large_N.txt");
-
-	export_vec_to_file<float>(disp_bs, "disp_bs_3_large_N.txt");
-	export_vec_to_file<float>(disp_uf, "disp_uf_3_large_N.txt");
-	export_vec_to_file<float>(disp_ch, "disp_ch_3_large_N.txt");
-	export_vec_to_file<float>(disp_ds, "disp_ds_3_large_N.txt");
 
 	return 0;
 }

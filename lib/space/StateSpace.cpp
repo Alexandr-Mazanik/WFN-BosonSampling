@@ -20,6 +20,7 @@ StateSpace::StateSpace(const StateSpace& space) {
 }
 
 StateSpace::StateSpace(int dim_num, std::vector<FockState> states_to_create) : dim_num_(dim_num) {
+	ph_num_ = NULL;
 	fock_basis_ = false;
 	states = states_to_create;
 }

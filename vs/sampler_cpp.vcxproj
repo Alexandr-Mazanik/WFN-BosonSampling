@@ -137,7 +137,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\lib\file_lib.cpp" />
     <ClCompile Include="..\lib\interferometer\Scheme.cpp" />
     <ClCompile Include="..\lib\math_lib.cpp" />
     <ClCompile Include="..\lib\network\ConnectivityComponent.cpp" />
@@ -160,9 +159,13 @@
     <ClInclude Include="..\lib\samplers\CoherentSampler.h" />
     <ClInclude Include="..\lib\samplers\DistinguishableSampler.h" />
     <ClInclude Include="..\lib\samplers\all_samplers.h" />
+    <ClInclude Include="..\lib\samplers\Sampler.h" />
     <ClInclude Include="..\lib\samplers\UniformSampler.h" />
     <ClInclude Include="..\lib\space\FockState.h" />
     <ClInclude Include="..\lib\space\StateSpace.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\lib\file_lib.tpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

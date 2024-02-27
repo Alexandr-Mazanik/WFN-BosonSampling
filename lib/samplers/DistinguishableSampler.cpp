@@ -44,3 +44,11 @@ void DistinguishableSampler::sample(int batch_size) {
 		(*space_ptr_).AddSampledState(sample);
 	}
 }
+
+StateSpace* DistinguishableSampler::space_ptr() {
+	return space_ptr_;
+}
+
+std::string DistinguishableSampler::get_name() {
+	return "ds";
+}

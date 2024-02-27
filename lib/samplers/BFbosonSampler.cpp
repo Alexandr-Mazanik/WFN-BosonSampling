@@ -70,3 +70,11 @@ std::vector<int> BFbosonSampler::getIndices(const std::vector<int>& state_vec) {
 
 	return indices;
 }
+
+StateSpace* BFbosonSampler::space_ptr() {
+	return space_ptr_;
+}
+
+std::string BFbosonSampler::get_name() {
+	return "bf";
+}

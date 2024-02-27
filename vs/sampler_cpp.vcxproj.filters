@@ -69,9 +69,6 @@
     <ClCompile Include="..\lib\interferometer\Scheme.cpp">
       <Filter>Исходные файлы\interferometer</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\file_lib.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\math_lib.h">
@@ -113,5 +110,11 @@
     <ClInclude Include="..\lib\file_lib.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="..\lib\samplers\Sampler.h">
+      <Filter>Файлы заголовков\samplers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\lib\file_lib.tpp" />
   </ItemGroup>
 </Project>
