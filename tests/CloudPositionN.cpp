@@ -17,20 +17,15 @@ void export_vec_to_file(std::vector<T> vec, std::string file_name) {
 		std::cout << "--> Couldn't open file\n";
 }
 
-float calc_mean_vec(std::vector<float> vec) {
-	float total = 0;
-	for (float elem : vec)
-		total += elem;
-
-	return total / vec.size();
-}
-
 int main() {
 	int points_num = 1000;
 
 	int ph_num = 4;
 	int dim_number = ph_num * ph_num;
 	int radius = 2;
+
+	std::vector<float> vec = { 1.12, 122.31, -12.2, 1.2 };
+	std::cout << get_vec_avg(vec);
 
 	StateSpace spaceBS(ph_num, dim_number);
 	StateSpace spaceUF(spaceBS);
@@ -117,15 +112,15 @@ int main() {
 			ds_moments.clear();
 		}
 
-		means_bs.push_back(calc_mean_vec(all_means_bs));
-		means_uf.push_back(calc_mean_vec(all_means_uf));
-		means_ch.push_back(calc_mean_vec(all_means_ch));
-		means_ds.push_back(calc_mean_vec(all_means_ds));
+		means_bs.push_back(get_vec_avg(all_means_bs));
+		means_uf.push_back(get_vec_avg(all_means_uf));
+		means_ch.push_back(get_vec_avg(all_means_ch));
+		means_ds.push_back(get_vec_avg(all_means_ds));
 
-		disp_bs.push_back(calc_mean_vec(all_dispersions_bs));
-		disp_uf.push_back(calc_mean_vec(all_dispersions_uf));
-		disp_ch.push_back(calc_mean_vec(all_dispersions_ch));
-		disp_ds.push_back(calc_mean_vec(all_dispersions_ds));
+		disp_bs.push_back(get_vec_avg(all_dispersions_bs));
+		disp_uf.push_back(get_vec_avg(all_dispersions_uf));
+		disp_ch.push_back(get_vec_avg(all_dispersions_ch));
+		disp_ds.push_back(get_vec_avg(all_dispersions_ds));
 
 		all_means_bs.clear();
 		all_means_uf.clear();

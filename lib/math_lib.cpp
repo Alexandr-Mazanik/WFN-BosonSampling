@@ -29,6 +29,10 @@ long factorial(const int n) {
 	return f;
 }
 
+float get_vec_avg(std::vector<float> vec) {
+	return std::accumulate(vec.begin(), vec.end(), 0.0) / vec.size();
+}
+
 std::complex<float> perm(const std::vector<std::vector<std::complex<float>>>& A, int n) {
 	std::vector<std::complex<float>> row_comb(n, std::complex<float>(0));
 	std::complex<float> total = 0;
