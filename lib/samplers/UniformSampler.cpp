@@ -12,7 +12,6 @@ void UniformSampler::sample(int batch_size) {
 		int sample_num = d_distr(generator);
 		(*space_ptr_).states[sample_num].increaseAppearance();
 	}
-	std::cout << "--> Samples has been calculated\n";
 }
 
 StateSpace* UniformSampler::space_ptr() {

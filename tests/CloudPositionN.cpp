@@ -4,7 +4,7 @@
 #include <iostream>
 
 int main() {
-	int N_start = 1;
+	int N_start = 0;
 	int N_end = 200;
 	int N_step = 10;
 
@@ -39,12 +39,13 @@ int main() {
 	std::vector<float> avg_mu, avg_sigma;
 
 	for (Sampler* sampler : samplers) {
+		std::cout << "\nSAMPLER: " << sampler->get_name() << "\n";
 		for (int N = N_start; N <= N_end; N += N_step) {
-			std::cout << "\n--> points_number = " << N << ";\n";
+			std::cout << "N: " << N << " / " << N_end << "\r";
 
 			for (int i = 0; i < avg_amount; ++i) {
 				sampler->sample(N);
-				Network network(sampler->space_ptr(), radius);
+				Network network(sampler->space_ptr(), radius, false);
 				std::vector<float> two_moments = network.degDistTwoMoments(network.degreeDistribution());
 
 				all_cloud_mu.push_back(two_moments[0]);
@@ -70,6 +71,8 @@ int main() {
 
 		avg_mu.clear();
 		avg_sigma.clear();
+
+		std::cout << "\n--> OK\n";
 	}
 
 	return 0;

@@ -57,7 +57,6 @@ void BFbosonSampler::sample(int batch_size) {
 		int sample_num = d_distr(generator);
 		(*space_ptr_).states[sample_num].increaseAppearance();
 	}
-	std::cout << "--> Samples has been calculated\n";
 }
 
 std::vector<int> BFbosonSampler::getIndices(const std::vector<int>& state_vec) {

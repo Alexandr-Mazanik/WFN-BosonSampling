@@ -5,14 +5,14 @@
 #include <fstream>
 #include <stack>
 
-Network::Network(StateSpace* space_ptr, int radius) {
+Network::Network(StateSpace* space_ptr, int radius, bool make_report) {
 	StateSpace sampled_space(space_ptr->getModesNum(), space_ptr->getSampledStates());
 	networkSpace_ = &sampled_space;
 
 	vertices_num_ = networkSpace_->getStatesNumber();
 
 	network_.resize(vertices_num_, std::vector<bool>(vertices_num_));
-	BuildNetwork(radius);
+	BuildNetwork(radius, make_report);
 };
 
 Network::Network(const Network& network) : networkSpace_(network.networkSpace_) {
@@ -28,7 +28,7 @@ Network::Network(StateSpace* space_ptr) {
 	vertices_num_ = networkSpace_->getStatesNumber();
 }
 
-void Network::BuildNetwork(int radius) {
+void Network::BuildNetwork(int radius, bool make_report) {
 	for (int i = 0; i < vertices_num_; ++i) {
 		network_[i][i] = false;
 		for (int j = i + 1; j < vertices_num_; ++j)
@@ -37,7 +37,8 @@ void Network::BuildNetwork(int radius) {
 			else
 				network_[i][j] = network_[j][i] = false;
 	}
-	std::cout << "--> The network has been built\n";
+	if (make_report)
+		std::cout << "--> The network has been built\n";
 }
 
 void Network::countConnectedComponents() {

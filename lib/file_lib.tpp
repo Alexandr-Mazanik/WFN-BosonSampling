@@ -9,9 +9,11 @@ void export_vec_to_file(std::vector<T> vec, std::string file_name) {
 
 	f_data.open("../../../analysis/" + file_name);
 
-	if (f_data.is_open())
+	if (f_data.is_open()) {
 		for (T elem : vec)
-			f_data << elem << " ";
+			f_data << elem << " "; 
+		std::cout << "\n--> Exported: " << file_name;
+	}
 	else
-		std::cout << "--> Couldn't open file\n";
+		std::cout << "\n--> Couldn't open file\n";
 }

@@ -4,11 +4,11 @@
 
 class Network {
 public:
-	Network(StateSpace* space_ptr, int radius);
+	Network(StateSpace* space_ptr, int radius, bool make_report=true);
 	Network(StateSpace* space_ptr);
 	Network(const Network& network);
 
-	void BuildNetwork(int radius);
+	void BuildNetwork(int radius, bool make_report=true);
 
 	void countConnectedComponents();
 	void DFS(int vertex, std::vector<bool>& visited);
