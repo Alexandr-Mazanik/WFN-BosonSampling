@@ -10,7 +10,7 @@ public:
 
 	StateSpace(int ph_num, int dim_num, bool createBasis = true);
 	StateSpace(const StateSpace& space);
-	StateSpace(int dim_num, std::vector<FockState> states_to_create = {});
+	StateSpace(int dim_num, std::vector<FockState*> states_to_create);
 
 	void CreateFockBasis();
 
@@ -32,8 +32,8 @@ public:
 	int getModesNum() const;
 	bool getIsBasis() const;
 	int getStatesNumber();
-	std::vector<FockState> getSampledStates();
-	std::vector<FockState>& getAllStates();
+	std::vector<FockState*> getSampledStates();
+	std::vector<FockState>* getAllStates();
 
 	void printStateSpace(int points_num = 1);
 

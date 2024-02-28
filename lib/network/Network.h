@@ -22,7 +22,7 @@ public:
 	void printNetwork();
 
 private:
-	StateSpace* networkSpace_;
+	StateSpace networkSpace_;
 
 	std::vector<Network> con_comp_;
 	std::vector<std::vector<bool>> network_;

@@ -17,12 +17,14 @@ StateSpace::StateSpace(const StateSpace& space) {
 	dim_num_ = space.getModesNum();
 	meanPhN_.resize(dim_num_);
 	states = space.states;
+	this->reset();
 }
 
-StateSpace::StateSpace(int dim_num, std::vector<FockState> states_to_create) : dim_num_(dim_num) {
+StateSpace::StateSpace(int dim_num, std::vector<FockState*> states_to_create) : dim_num_(dim_num) {
 	ph_num_ = NULL;
 	fock_basis_ = false;
-	states = states_to_create;
+	for (FockState* state : states_to_create)
+		states.push_back(*state);
 }
 
 void StateSpace::CreateFockBasis() {
@@ -73,19 +75,19 @@ float StateSpace::twoPointCorrFunction(int mode1, int mode2) {
 
 float StateSpace::calcAVGLogProb() {
 	float all_prob = 0.;
-	std::vector<FockState> sampled = getSampledStates();
-	for (FockState& state : sampled)
-		all_prob += -std::log(state.getStateProb());
+	std::vector<FockState*> sampled = getSampledStates();
+	for (FockState* state : sampled)
+		all_prob += -std::log(state->getStateProb());
 
 	return all_prob / sampled.size();
 }
 
 float StateSpace::calcLogProbDispersion() {
 	float all_prob_sq = 0.;
-	std::vector<FockState> sampled = getSampledStates();
+	std::vector<FockState*> sampled = getSampledStates();
 
-	for (FockState& state : sampled)
-		all_prob_sq += std::log(state.getStateProb()) * std::log(state.getStateProb());
+	for (FockState* state : sampled)
+		all_prob_sq += std::log(state->getStateProb()) * std::log(state->getStateProb());
 	all_prob_sq /= sampled.size();
 	float avg_prob = calcAVGLogProb();
 
@@ -97,7 +99,7 @@ void StateSpace::ExportSampleData(std::string file_name) {
 	file_data.open("./data/" + file_name);
 
 	if (file_data.is_open()) {
-		for (FockState state : states) {
+		for (FockState& state : states) {
 			int state_num = state.getAppearance();
 			for (int i = 0; i < state_num; ++i) {
 				file_data << "[";
@@ -199,16 +201,16 @@ int StateSpace::getStatesNumber() {
 	return (int)states.size();
 }
 
-std::vector<FockState> StateSpace::getSampledStates() {
-	std::vector<FockState> sampled;
+std::vector<FockState*> StateSpace::getSampledStates() {
+	std::vector<FockState*> sampled;
 	for (int i = 0; i < states.size(); ++i)
 		if (states[i].getAppearance() >= 1)
-			sampled.push_back(states[i]);
+			sampled.push_back(&states[i]);
 	return sampled;
 }
 
-std::vector<FockState>& StateSpace::getAllStates() {
-	return states;
+std::vector<FockState>* StateSpace::getAllStates() {
+	return &states;
 }
 
 void StateSpace::printStateSpace(int points_num) {

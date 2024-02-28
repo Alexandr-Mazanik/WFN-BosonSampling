@@ -4,13 +4,13 @@
 #include <iostream>
 
 int main() {
-	int N_start = 0;
-	int N_end = 200;
-	int N_step = 10;
+	int N_start = 1;
+	int N_end = 1601;
+	int N_step = 100;
 
-	int avg_amount = 100;
+	int avg_amount = 50;
 
-	int ph_num = 3;
+	int ph_num = 4;
 	int dim_number = ph_num * ph_num;
 	int radius = 2;
 
@@ -20,7 +20,7 @@ int main() {
 	StateSpace spaceDS(ph_num, dim_number, false);
 
 	Scheme scheme(spaceBS);
-	scheme.ImportSchemeUnitary("scheme_unitary_3.txt");
+	scheme.ImportSchemeUnitary("scheme_unitary_4.txt");
 
 	std::vector<int> init_conf(ph_num, 1);
 	init_conf.resize(dim_number);

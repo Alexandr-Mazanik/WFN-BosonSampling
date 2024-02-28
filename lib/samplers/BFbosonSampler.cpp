@@ -31,17 +31,17 @@ std::vector<std::vector<std::complex<float>>> BFbosonSampler::findSubmatrix(cons
 }
 
 void BFbosonSampler::CalculateDistribution() {
-	for (int i = 0; i < (*space_ptr_).getAllStates().size(); ++i) {
+	for (int i = 0; i < space_ptr_->getAllStates()->size(); ++i) {
 		int norm = 1;
 		for (int num : init_state_)
 			norm *= factorial(num);
-		for (int num : (*space_ptr_).getAllStates()[i].getState())
+		for (int num : (*space_ptr_->getAllStates())[i].getState())
 			norm *= factorial(num);
 
-		float perm_abs = abs(perm(findSubmatrix((*space_ptr_).getAllStates()[i].getState()), ph_num_));
+		float perm_abs = abs(perm(findSubmatrix((*space_ptr_->getAllStates())[i].getState()), ph_num_));
 
 		float prob = perm_abs * perm_abs / (float)norm;
-		(*space_ptr_).getAllStates()[i].setProbability(prob);
+		(*space_ptr_->getAllStates())[i].setProbability(prob);
 
 		distribution_.push_back(prob);
 	}
@@ -55,7 +55,7 @@ void BFbosonSampler::sample(int batch_size) {
 	std::discrete_distribution<> d_distr(distribution_.begin(), distribution_.end());
 	for (int i = 0; i < batch_size; ++i) {
 		int sample_num = d_distr(generator);
-		(*space_ptr_).states[sample_num].increaseAppearance();
+		space_ptr_->states[sample_num].increaseAppearance();
 	}
 }
 
