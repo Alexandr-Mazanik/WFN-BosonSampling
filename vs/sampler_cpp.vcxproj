@@ -144,6 +144,7 @@
     <ClCompile Include="..\lib\samplers\BFbosonSampler.cpp" />
     <ClCompile Include="..\lib\samplers\CoherentSampler.cpp" />
     <ClCompile Include="..\lib\samplers\DistinguishableSampler.cpp" />
+    <ClCompile Include="..\lib\samplers\MeanFieldSampler.cpp" />
     <ClCompile Include="..\lib\samplers\UniformSampler.cpp" />
     <ClCompile Include="..\lib\space\FockState.cpp" />
     <ClCompile Include="..\lib\space\StateSpace.cpp" />
@@ -159,6 +160,7 @@
     <ClInclude Include="..\lib\samplers\CoherentSampler.h" />
     <ClInclude Include="..\lib\samplers\DistinguishableSampler.h" />
     <ClInclude Include="..\lib\samplers\all_samplers.h" />
+    <ClInclude Include="..\lib\samplers\MeanFieldSampler.h" />
     <ClInclude Include="..\lib\samplers\Sampler.h" />
     <ClInclude Include="..\lib\samplers\UniformSampler.h" />
     <ClInclude Include="..\lib\space\FockState.h" />

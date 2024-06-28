@@ -5,6 +5,7 @@
 #include "samplers/CoherentSampler.h"
 #include "samplers/DistinguishableSampler.h"
 #include "samplers/UniformSampler.h"
+#include "samplers/MeanFieldSampler.h"
 
 #include "network/Network.h"
 #include "network/ConnectivityComponent.h"
