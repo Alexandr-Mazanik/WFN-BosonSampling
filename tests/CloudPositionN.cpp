@@ -5,13 +5,13 @@
 
 int main() {
 	int N_start = 1;
-	int N_end = 1601;
+	int N_end = 2001;
 	int N_step = 100;
 
-	int avg_amount = 50;
+	int avg_amount = 30;
 
-	int ph_num = 4;
-	int dim_number = ph_num * ph_num;
+	int ph_num = 8;
+	int dim_number = 10;
 	int radius = 2;
 
 	StateSpace spaceBS(ph_num, dim_number);
@@ -20,7 +20,7 @@ int main() {
 	StateSpace spaceDS(ph_num, dim_number, false);
 
 	Scheme scheme(spaceBS);
-	scheme.ImportSchemeUnitary("scheme_unitary_4.txt");
+	scheme.ImportSchemeUnitary("scheme_unitary_m10.txt");
 
 	std::vector<int> init_conf(ph_num, 1);
 	init_conf.resize(dim_number);
@@ -61,9 +61,9 @@ int main() {
 			all_cloud_sigma.clear();	
 		}
 		
-		std::string file_name_mu = "cloud_position_N/data/cloud_mu_N_" + std::to_string(N_start) + "_" + 
+		std::string file_name_mu = "cloud_position_N/data/cloud_mu_8_10_N_" + std::to_string(N_start) + "_" + 
 			std::to_string(N_end) + "_" + std::to_string(N_step) + "_" + sampler->get_name() + ".txt";
-		std::string file_name_sigma = "cloud_position_N/data/cloud_sigma_N_" + std::to_string(N_start) + "_" + 
+		std::string file_name_sigma = "cloud_position_N/data/cloud_sigma_8_10_N_" + std::to_string(N_start) + "_" + 
 			std::to_string(N_end) + "_" + std::to_string(N_step) + "_" + sampler->get_name() + ".txt";
 
 		export_vec_to_file<float>(avg_mu, file_name_mu);
