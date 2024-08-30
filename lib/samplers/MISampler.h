@@ -3,6 +3,7 @@
 #include "Sampler.h"
 #include "space/StateSpace.h"
 #include "interferometer/Scheme.h"
+#include "samplers/DistinguishableSampler.h"
 
 class MISampler : public Sampler {
 public:
@@ -20,5 +21,7 @@ private:
 	StateSpace* space_ptr_;
 
 	std::vector<int> init_state_;
+	StateSpace base_space_;
+	DistinguishableSampler base_sampler_;
 };
 
