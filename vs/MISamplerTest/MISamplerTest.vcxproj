@@ -18,13 +18,20 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\tests\mis_test.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\sampler_cpp.vcxproj">
+      <Project>{e73435f3-4d4e-4fa9-aeb9-bfe8859b0e14}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{e73435f3-4d4e-4fa9-aeb9-bfe8859b0e14}</ProjectGuid>
-    <RootNamespace>samplercpp</RootNamespace>
+    <ProjectGuid>{e970aed8-3ce6-4199-b153-95d4c8623663}</ProjectGuid>
+    <RootNamespace>MISamplerTest</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>bs-StateSpace</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -41,13 +48,13 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -71,11 +78,17 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>../../lib;../../;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>../../lib;../../;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>..\lib;$(IncludePath)</IncludePath>
+    <IncludePath>../../lib;../../;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>..\lib;$(IncludePath)</IncludePath>
+    <IncludePath>../../lib;../../;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -116,9 +129,6 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <Lib>
-      <OutputFile>..\$(TargetName)$(TargetExt)</OutputFile>
-    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -136,41 +146,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="..\lib\interferometer\Scheme.cpp" />
-    <ClCompile Include="..\lib\math_lib.cpp" />
-    <ClCompile Include="..\lib\network\ConnectivityComponent.cpp" />
-    <ClCompile Include="..\lib\network\Network.cpp" />
-    <ClCompile Include="..\lib\samplers\BFbosonSampler.cpp" />
-    <ClCompile Include="..\lib\samplers\CoherentSampler.cpp" />
-    <ClCompile Include="..\lib\samplers\DistinguishableSampler.cpp" />
-    <ClCompile Include="..\lib\samplers\MeanFieldSampler.cpp" />
-    <ClCompile Include="..\lib\samplers\MISampler.cpp" />
-    <ClCompile Include="..\lib\samplers\UniformSampler.cpp" />
-    <ClCompile Include="..\lib\space\FockState.cpp" />
-    <ClCompile Include="..\lib\space\StateSpace.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\bs-StateSpace.h" />
-    <ClInclude Include="..\lib\file_lib.h" />
-    <ClInclude Include="..\lib\interferometer\Scheme.h" />
-    <ClInclude Include="..\lib\math_lib.h" />
-    <ClInclude Include="..\lib\network\ConnectivityComponent.h" />
-    <ClInclude Include="..\lib\network\Network.h" />
-    <ClInclude Include="..\lib\samplers\BFbosonSampler.h" />
-    <ClInclude Include="..\lib\samplers\CoherentSampler.h" />
-    <ClInclude Include="..\lib\samplers\DistinguishableSampler.h" />
-    <ClInclude Include="..\lib\samplers\all_samplers.h" />
-    <ClInclude Include="..\lib\samplers\MeanFieldSampler.h" />
-    <ClInclude Include="..\lib\samplers\MISampler.h" />
-    <ClInclude Include="..\lib\samplers\Sampler.h" />
-    <ClInclude Include="..\lib\samplers\UniformSampler.h" />
-    <ClInclude Include="..\lib\space\FockState.h" />
-    <ClInclude Include="..\lib\space\StateSpace.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\lib\file_lib.tpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

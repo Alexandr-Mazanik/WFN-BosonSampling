@@ -72,6 +72,9 @@
     <ClCompile Include="..\lib\samplers\MeanFieldSampler.cpp">
       <Filter>Исходные файлы\samplers</Filter>
     </ClCompile>
+    <ClCompile Include="..\lib\samplers\MISampler.cpp">
+      <Filter>Исходные файлы\samplers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lib\math_lib.h">
@@ -117,6 +120,9 @@
       <Filter>Файлы заголовков\samplers</Filter>
     </ClInclude>
     <ClInclude Include="..\lib\samplers\MeanFieldSampler.h">
+      <Filter>Файлы заголовков\samplers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\samplers\MISampler.h">
       <Filter>Файлы заголовков\samplers</Filter>
     </ClInclude>
   </ItemGroup>
