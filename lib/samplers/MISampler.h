@@ -7,9 +7,14 @@
 
 class MISampler : public Sampler {
 public:
-	MISampler(StateSpace* space, Scheme& scheme, std::vector<int>& init_state);
+	MISampler(StateSpace* space, Scheme& scheme, std::vector<int>& init_state, int tau_burn, int tau_thin);
 
+	float CalculateStateProb(FockState* state);
+	FockState MC_step(FockState prev_step);
 	void sample(int batch_size) override;
+
+	std::vector<std::vector<std::complex<float>>> findSubmatrix(const std::vector<int>& out_state);
+	std::vector<int> getIndices(const std::vector<int>& state_vec);
 
 	StateSpace* space_ptr() override;
 
@@ -17,6 +22,9 @@ public:
 
 private:
 	int ph_num_, modes_num_;
+	int tau_burn_, tau_thin_;
+	int mc_step_num_;
+	
 	Scheme scheme_;
 	StateSpace* space_ptr_;
 
