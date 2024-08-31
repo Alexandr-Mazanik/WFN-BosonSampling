@@ -6,7 +6,7 @@
 
 class BFbosonSampler : public Sampler{
 public:
-	BFbosonSampler(StateSpace* space, Scheme& scheme, std::vector<int>& init_state);
+	BFbosonSampler(StateSpace* space, Scheme& scheme, std::vector<int>& init_state, bool calc_distr = true);
 
 	std::vector<std::vector<std::complex<float>>> findSubmatrix(const std::vector<int>& out_state);
 	void CalculateDistribution();

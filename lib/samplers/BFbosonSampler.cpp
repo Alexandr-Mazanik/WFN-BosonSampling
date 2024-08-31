@@ -5,12 +5,13 @@
 #include <random>
 #include <chrono>
 
-BFbosonSampler::BFbosonSampler(StateSpace* space, Scheme& scheme, std::vector<int>& init_state) :
+BFbosonSampler::BFbosonSampler(StateSpace* space, Scheme& scheme, std::vector<int>& init_state, bool calc_distr) :
 	init_state_(init_state), scheme_(scheme), space_ptr_(space) {
 	ph_num_ = (*space_ptr_).getPhNum();
 	modes_num_ = (*space_ptr_).getModesNum();
 
-	CalculateDistribution();
+	if (calc_distr)
+		CalculateDistribution();
 }
 
 std::vector<std::vector<std::complex<float>>> BFbosonSampler::findSubmatrix(const std::vector<int>& out_state) {
