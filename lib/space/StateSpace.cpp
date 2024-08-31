@@ -96,7 +96,7 @@ float StateSpace::calcLogProbDispersion() {
 
 void StateSpace::ExportSampleData(std::string file_name) {
 	std::ofstream file_data;
-	file_data.open("./data/" + file_name);
+	file_data.open("../../../analysis/" + file_name);
 
 	if (file_data.is_open()) {
 		for (FockState& state : states) {
