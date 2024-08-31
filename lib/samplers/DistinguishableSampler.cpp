@@ -1,13 +1,56 @@
 #include "samplers/DistinguishableSampler.h"
+#include "math_lib.h"
 
 #include <random>
 #include <chrono>
+#include <iostream>
 
 DistinguishableSampler::DistinguishableSampler(StateSpace* space, Scheme& scheme, std::vector<int>& init_state) :
 	init_state_(init_state), scheme_(scheme), space_ptr_(space) {
 
 	ph_num_ = (*space_ptr_).getPhNum();
 	modes_num_ = (*space_ptr_).getModesNum();
+}
+
+std::vector<int> DistinguishableSampler::getIndices(const std::vector<int>& state_vec) {
+	std::vector<int> indices;
+	for (int i = 0; i < modes_num_; ++i) {
+		if (state_vec[i] > 0)
+			for (int j = 0; j < state_vec[i]; ++j)
+				indices.push_back(i);
+	}
+
+	return indices;
+}
+
+std::vector<std::vector<std::complex<float>>> DistinguishableSampler::findSubmatrix(const std::vector<int>& out_state) {
+	std::vector<int> column_indices = getIndices(init_state_);
+	std::vector<int> row_indices = getIndices(out_state);
+
+	std::vector<std::vector<std::complex<float>>> submatrix;
+	std::vector<std::vector<std::complex<float>>> temp_mat(modes_num_);
+
+	for (int col_ind : column_indices)
+		for (int i = 0; i < modes_num_; ++i)
+			temp_mat[i].push_back(scheme_.unitary_matrix[i][col_ind]);
+
+	for (int row_ind : row_indices)
+		submatrix.push_back(temp_mat[row_ind]);
+
+	return submatrix;
+}
+
+float DistinguishableSampler::CalculateStateProb(FockState* state) {
+	int norm = 1;
+	for (int num : init_state_)
+		norm *= factorial(num);
+	for (int num : state->getState())
+		norm *= factorial(num);
+
+	std::vector<std::vector<std::complex<float>>> abs_sub = abs_mat(findSubmatrix(state->getState()));
+	std::complex<float> permanent = perm(mat_mul(abs_sub, abs_sub), ph_num_);
+
+	return permanent.real() / (float)norm;
 }
 
 std::vector<float> DistinguishableSampler::calc_distribution(int j) {
@@ -20,6 +63,7 @@ std::vector<float> DistinguishableSampler::calc_distribution(int j) {
 
 void DistinguishableSampler::sample(int batch_size) {
 	for (int i = 0; i < batch_size; ++i) {
+		std::cout << "sampling: " << i << " / " << batch_size << "\r";
 		std::vector<int> sample;
 		std::vector<int> h;
 

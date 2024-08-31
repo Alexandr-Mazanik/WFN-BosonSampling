@@ -10,6 +10,10 @@ public:
 
 	std::vector<float> calc_distribution(int j);
 	void sample(int batch_size) override;
+	
+	std::vector<std::vector<std::complex<float>>> findSubmatrix(const std::vector<int>& out_state);
+	float CalculateStateProb(FockState* state);
+	std::vector<int> getIndices(const std::vector<int>& state_vec);
 
 	StateSpace* space_ptr() override;
 
