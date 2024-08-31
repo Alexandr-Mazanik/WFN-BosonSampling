@@ -18,4 +18,6 @@ std::complex<float> perm(const std::vector<std::vector<std::complex<float>>>& A,
 std::vector<std::vector<std::complex<float>>> mat_mul(const std::vector<std::vector<std::complex<float>>>& mat1,
 	const std::vector<std::vector<std::complex<float>>>& mat2);
 
+std::vector<std::vector<std::complex<float>>> abs_mat(const std::vector<std::vector<std::complex<float>>>& mat);
+
 std::vector<std::vector<std::complex<float>>> transpose(const std::vector<std::vector<std::complex<float>>> data);

@@ -89,3 +89,14 @@ std::vector<std::vector<std::complex<float>>> transpose(const std::vector<std::v
 		}
 	return result;
 }
+
+std::vector<std::vector<std::complex<float>>> abs_mat(const std::vector<std::vector<std::complex<float>>>& data) {
+	
+	std::vector<std::vector<std::complex<float>>> result(data[0].size(),
+		std::vector<std::complex<float>>(data.size()));
+	for (std::vector<std::complex<float>>::size_type i = 0; i < data[0].size(); i++)
+		for (std::vector<std::complex<float>>::size_type j = 0; j < data.size(); j++) {
+			result[i][j] = abs(data[i][j]);
+		}
+	return result;
+}
