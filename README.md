@@ -51,5 +51,11 @@ State space analysis of the boson sampling problem.
   
   **bs-StateSpace.lib**: File of the described static library.
 # 
-### /linux_version
+### /!linux_version
 The described project is adapted for compilation on Linux systems.
+
+- **makefile**: a general makefile; before running the compiled program, paste the "/resources" folder from this repository into the project.
+  - use `make main_make` to make a **main.cpp** file corresponding to **CloudPositionN.cpp** from "/tests"
+  - use `make neville_test_make` to make **Neville_test.cpp** (see "/tests")
+  - use `make diff_u_test_make` to make **diff_unitary.cpp** (see "/tests")
+  - use `make mis_test_make` to make **mis_test.cpp** (see "/tests")
