@@ -1,10 +1,9 @@
 #define _USE_MATH_DEFINES
 
 #include "samplers/MeanFieldSampler.h"
+#include "../bs-StateSpace.h"
 
 #include <cstdlib>
-#include <random>
-#include <chrono>
 #include <stdexcept>
 
 MeanFieldSampler::MeanFieldSampler(StateSpace* space, Scheme& scheme, std::vector<int>& init_state) :
@@ -38,15 +37,16 @@ std::vector<float> MeanFieldSampler::calc_distribution(std::vector<std::complex<
 
 void MeanFieldSampler::sample(int batch_size) {
 	for (int i = 0; i < batch_size; ++i) {
-		unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-		srand(seed);
+		//unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+		//srand(seed);
 
+		std::uniform_real_distribution<double> dist(0, std::nextafter(1, DBL_MAX));
 		std::vector<int> sample(modes_num_, 0);
 		std::vector<std::complex<float>> theta;
 		for (int k = 0; k < ph_num_; ++k)
-			theta.push_back(std::complex<float>(0.0, 2 * M_PI * (float)rand() / RAND_MAX));
+			theta.push_back(std::complex<float>(0.0, 2 * M_PI * dist(generator)));
 
-		std::default_random_engine generator(seed);
+		//std::default_random_engine generator(seed);
 
 		std::vector<float> distribution = calc_distribution(theta);
 		std::discrete_distribution<> d_distr(distribution.begin(), distribution.end());
@@ -64,4 +64,8 @@ StateSpace* MeanFieldSampler::space_ptr() {
 
 std::string MeanFieldSampler::get_name() {
 	return "mf";
+}
+
+void MeanFieldSampler::change_scheme(Scheme& scheme) {
+	scheme_ = scheme;
 }

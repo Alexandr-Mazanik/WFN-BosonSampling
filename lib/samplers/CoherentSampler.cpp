@@ -1,8 +1,7 @@
 #include "samplers/CoherentSampler.h"
 #include "math_lib.h"
+#include "../bs-StateSpace.h"
 
-#include <random>
-#include <chrono>
 #include <cmath>
 #include <iostream>
 
@@ -26,8 +25,8 @@ CoherentSampler::CoherentSampler(StateSpace* space, Scheme& scheme, std::vector<
 }
 
 void CoherentSampler::sample(int batch_size) {
-	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-	std::default_random_engine generator(seed);
+	//unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+	//std::default_random_engine generator(seed);
 
 	std::vector<std::poisson_distribution<int>> out_dist;
 	for (int m = 0; m < modes_num_; ++m) {

@@ -123,7 +123,7 @@ void StateSpace::ImportSampleData(int sample_num, std::string file_name) {
 	std::ifstream f_sample;
 	std::string s_sample;
 
-	f_sample.open("./data/" + file_name);
+	f_sample.open("../../resources/samples/" + file_name);
 
 	if (f_sample.is_open()) {
 		int i = 0;
@@ -145,10 +145,15 @@ void StateSpace::ImportSampleData(int sample_num, std::string file_name) {
 				}
 				j++;
 			}
-			AddSampledState(sample);
+			//AddSampledState(sample);
+
+			states.push_back(FockState(sample, dim_num_));
+			states[states.size() - 1].increaseAppearance();
+			states[states.size() - 1].setProbability(-1);
+
 			i++;
 		}
-		std::cout << "--> The Data file has been read\n";
+		//std::cout << "--> The Data file has been read\n";
 	}
 	else {
 		std::cout << "--> Couldn't open file\n";

@@ -1,8 +1,7 @@
 #include "samplers/DistinguishableSampler.h"
 #include "math_lib.h"
+#include "../bs-StateSpace.h"
 
-#include <random>
-#include <chrono>
 #include <iostream>
 
 DistinguishableSampler::DistinguishableSampler(StateSpace* space, Scheme& scheme, std::vector<int>& init_state) :
@@ -63,13 +62,12 @@ std::vector<float> DistinguishableSampler::calc_distribution(int j) {
 
 void DistinguishableSampler::sample(int batch_size) {
 	for (int i = 0; i < batch_size; ++i) {
-		std::cout << "sampling: " << i << " / " << batch_size << "\r";
 		std::vector<int> sample;
 		std::vector<int> h;
 
 		for (int j = 0; j < ph_num_; ++j) {
-			unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-			std::default_random_engine generator(seed);
+			//unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+			//std::default_random_engine generator(seed);
 
 			std::vector<float> distribution = calc_distribution(j);
 			std::discrete_distribution<> d_distr(distribution.begin(), distribution.end());
@@ -95,4 +93,8 @@ StateSpace* DistinguishableSampler::space_ptr() {
 
 std::string DistinguishableSampler::get_name() {
 	return "ds";
+}
+
+void DistinguishableSampler::change_scheme(Scheme& scheme) {
+	scheme_ = scheme;
 }

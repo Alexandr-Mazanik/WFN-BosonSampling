@@ -1,6 +1,7 @@
 #pragma once
 
 #include "space/StateSpace.h"
+#include "interferometer/Scheme.h"
 
 class Sampler {
 public:
@@ -9,5 +10,7 @@ public:
 	virtual StateSpace* space_ptr() = 0;
 
 	virtual std::string get_name() = 0;
+
+	virtual void change_scheme(Scheme& scheme) = 0;
 };
 

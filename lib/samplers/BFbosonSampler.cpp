@@ -1,9 +1,8 @@
 #include "samplers/BFbosonSampler.h"
 #include "math_lib.h"
+#include "../bs-StateSpace.h"
 
 #include <iostream>
-#include <random>
-#include <chrono>
 
 BFbosonSampler::BFbosonSampler(StateSpace* space, Scheme& scheme, std::vector<int>& init_state, bool calc_distr) :
 	init_state_(init_state), scheme_(scheme), space_ptr_(space) {
@@ -50,8 +49,8 @@ void BFbosonSampler::CalculateDistribution() {
 }
 
 void BFbosonSampler::sample(int batch_size) {
-	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-	std::default_random_engine generator(seed);
+	//unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+	//std::default_random_engine generator(seed);
 
 	std::discrete_distribution<> d_distr(distribution_.begin(), distribution_.end());
 	for (int i = 0; i < batch_size; ++i) {
@@ -77,4 +76,10 @@ StateSpace* BFbosonSampler::space_ptr() {
 
 std::string BFbosonSampler::get_name() {
 	return "bf";
+}
+
+void BFbosonSampler::change_scheme(Scheme& scheme) {
+	scheme_ = scheme;
+	distribution_.clear();
+	CalculateDistribution();
 }
