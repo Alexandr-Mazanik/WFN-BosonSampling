@@ -18,6 +18,8 @@ public:
 	
 	std::string get_name() override;
 
+	void change_scheme(Scheme& scheme) override;
+
 private:
 	int ph_num_, modes_num_;
 	StateSpace* space_ptr_;

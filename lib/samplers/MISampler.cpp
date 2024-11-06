@@ -1,17 +1,20 @@
 #include "samplers/MISampler.h"
 #include "math_lib.h"
+#include "../bs-StateSpace.h"
 
-#include <chrono>
 #include <iostream>
 
-MISampler::MISampler(StateSpace* space, Scheme& scheme, std::vector<int>& init_state, int tau_burn, int tau_thin) :
+MISampler::MISampler(StateSpace* space, Scheme& scheme, std::vector<int>& init_state, 
+	int tau_burn, int tau_thin) :
+
 	init_state_(init_state), scheme_(scheme), space_ptr_(space), 
-	ph_num_(space->getPhNum()), modes_num_(space->getModesNum()),
+	ph_num_(space->getPhNum()), modes_num_(space->getModesNum()), curr_mc_state_(init_state_, modes_num_),
 	base_space_(ph_num_, modes_num_, false), base_sampler_(&base_space_, scheme, init_state) { 
-	
+
 	tau_burn_ = tau_burn;
 	tau_thin_ = tau_thin;
-	mc_step_num_ = 0;
+
+	reset_mc();
 }
 
 float MISampler::CalculateStateProb(FockState* state) {
@@ -55,10 +58,9 @@ std::vector<int> MISampler::getIndices(const std::vector<int>& state_vec) {
 	return indices;
 }
 
-FockState MISampler::MC_step(FockState prev_step) {
+void MISampler::MC_step() {
 	
-	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-	srand(seed);
+	std::uniform_real_distribution<double> dist(0, std::nextafter(1, DBL_MAX));
 
 	mc_step_num_++;
 
@@ -67,36 +69,38 @@ FockState MISampler::MC_step(FockState prev_step) {
 	base_space_.reset();
 
 	float accept_prob = (CalculateStateProb(&try_step) * 
-		base_sampler_.CalculateStateProb(&prev_step) /
-		(CalculateStateProb(&prev_step) *
+		base_sampler_.CalculateStateProb(&curr_mc_state_) /
+		(CalculateStateProb(&curr_mc_state_) *
 			base_sampler_.CalculateStateProb(&try_step)));
 	if (accept_prob > 1)
 		accept_prob = 1;
-	
-	if (((double)rand()) / RAND_MAX <= accept_prob)
-		return try_step;
-	else
-		return prev_step;
+
+	if (dist(generator) <= accept_prob)
+		curr_mc_state_ = try_step;
 }
 
 void MISampler::sample(int batch_size) {
 	int samples_num = 0;
-	
-	base_sampler_.sample(1);
-	FockState curr_state = *(base_space_.getSampledStates()[0]);
-	base_space_.reset();
 
 	while (samples_num < batch_size) {
-		curr_state = MC_step(curr_state);
+		MC_step();
 
-		if (mc_step_num_ > tau_burn_ and (mc_step_num_ - tau_burn_) % tau_thin_ == 0) {
-			std::vector<int> state = curr_state.getState();
+		if (mc_step_num_ >= tau_burn_ and (mc_step_num_ - tau_burn_) % tau_thin_ == 0) {
+			std::vector<int> state = curr_mc_state_.getState();
 			space_ptr_->AddSampledState(state);
+
 			samples_num++;
 		}
 
-		std::cout << "sampling: " << samples_num << " / " << batch_size << "\r";
 	}
+}
+
+void MISampler::reset_mc() {
+	mc_step_num_ = 0;
+
+	base_sampler_.sample(1);
+	curr_mc_state_ = *(base_space_.getSampledStates()[0]);
+	base_space_.reset();
 }
 
 StateSpace* MISampler::space_ptr() {
