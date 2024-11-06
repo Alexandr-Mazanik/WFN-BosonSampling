@@ -1,0 +1,52 @@
+TARGET = NevilleTest
+
+$(TARGET): neville_test.o lib/bs-StateSpace-lib.a
+	g++ -I /lib/ $^ -o $@
+
+neville_test.o: Neville_test.cpp
+	g++ -I /lib/ -c $< -o $@
+
+lib/bs-StateSpace-lib.a: lib/interferometer/Scheme.o lib/network/Network.o lib/samplers/MISampler.o lib/samplers/BFbosonSampler.o lib/samplers/CoherentSampler.o lib/samplers/DistinguishableSampler.o lib/samplers/MeanFieldSampler.o lib/samplers/UniformSampler.o lib/samplers/Sampler.o lib/space/FockState.o lib/space/StateSpace.o lib/math_lib.o lib/file_lib.o
+	ar rcs $@ $^
+
+lib/file_lib.o: lib/file_lib.cpp lib/file_lib.h
+	g++ -c -o $@ $<
+
+lib/math_lib.o: lib/math_lib.cpp lib/math_lib.h
+	g++ -c -o $@ $<
+
+lib/interferometer/Scheme.o: lib/interferometer/Scheme.cpp lib/interferometer/Scheme.h
+	g++ -c -o $@ $<
+
+lib/network/Network.o: lib/network/Network.cpp lib/network/Network.h
+	g++ -c -o $@ $<
+
+lib/samplers/MISampler.o: lib/samplers/MISampler.cpp lib/samplers/MISampler.h
+	g++ -c -o $@ $<
+
+lib/samplers/BFbosonSampler.o: lib/samplers/BFbosonSampler.cpp lib/samplers/BFbosonSampler.h
+	g++ -c -o $@ $<
+
+lib/samplers/CoherentSampler.o: lib/samplers/CoherentSampler.cpp lib/samplers/CoherentSampler.h
+	g++ -c -o $@ $<
+
+lib/samplers/DistinguishableSampler.o: lib/samplers/DistinguishableSampler.cpp lib/samplers/DistinguishableSampler.h
+	g++ -c -o $@ $<
+
+lib/samplers/MeanFieldSampler.o: lib/samplers/MeanFieldSampler.cpp lib/samplers/MeanFieldSampler.h 
+	g++ -c -o $@ $<
+
+lib/samplers/UniformSampler.o: lib/samplers/UniformSampler.cpp lib/samplers/UniformSampler.h
+	g++ -c -o $@ $<
+
+lib/samplers/Sampler.o: lib/samplers/Sampler.cpp lib/samplers/Sampler.h 
+	g++ -c -o $@ $<
+
+lib/space/FockState.o: lib/space/FockState.cpp lib/space/FockState.h 
+	g++ -c -o $@ $<
+
+lib/space/StateSpace.o: lib/space/StateSpace.cpp lib/space/StateSpace.h
+	g++ -c -o $@ $<
+
+clean:
+	rm -f *.o *.a $(TARGET)
